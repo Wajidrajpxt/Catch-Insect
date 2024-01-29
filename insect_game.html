@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>insect game</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .section1 {
+            height: 100vh;
+            width: 100%;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+
+        .slider-upward {
+            height: 300vh;
+            width: 100%;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+
+        .foldr {
+            height: 20vh;
+            width: 45%;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .parent1 {
+            height: 100vh;
+            width: 100%;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* margin-top: -100vh; */
+        }
+
+        .catch {
+            font-size: 70px;
+            color: blue;
+        }
+
+        .play {
+            height: 50px;
+            width: 170px;
+            border: 1px solid #000;
+            background-color: wheat;
+            font-size: 20px;
+            color: blue;
+            font-weight: 900;
+        }
+
+        .parent2 {
+            height: 100vh;
+            width: 100%;
+            background-color: red;
+            transition: all 0.20s linear;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .your {
+            font-size: 50px;
+            color: white;
+        }
+
+        .container {
+            height: 30vh;
+            width: 50%;
+            border: 1px solid #000;
+            display: flex;
+        }
+
+        .child {
+            height: 100%;
+            width: 25%;
+            border: 1px solid #000;
+            /* z-index: 111; */
+        }
+
+        .pic {
+            height: 100%;
+            width: 100%;
+            border: 1px solid #000;
+            transition: all 0.2s linear;
+        }
+
+        .child:hover .pic {
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .parent3 {
+            height: 100vh;
+            width: 100%;
+            background-color: violet;
+            overflow: hidden;
+            /* display: flex;
+            justify-content: space-between; */
+            /* position: relative;/ */
+
+        }
+
+        .navbr {
+            height: 15vh;
+            width: 100%;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tim {
+            height: 80px;
+            width: max-content;
+            border: 1px solid #000;
+        }
+
+        .txt {
+            font-size: 30px;
+            color: white;
+
+        }
+
+        .scor {
+            height: 50px;
+            width: 200px;
+            border: 1px solid #000;
+        }
+
+        /* js clasess */
+        .show {
+            opacity: 0;
+        }
+
+        .up {
+            margin-top: -100vh;
+        }
+
+        .cid {
+            height: 100px;
+            width: 100px;
+            /* border: 5px solid #000; */
+            position: absolute;
+            left: 0;
+            top: 15%;
+
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+
+        .img-style,
+        .imge1 {
+            height: 100px;
+            width: 100px;
+            /* border: 1px solid #000; */
+        }
+
+
+        .kill{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="section1">
+
+        <div class="slider-upward">
+
+
+            <div class="parent1">
+                <div class=" foldr">
+
+                    <h1 class="catch">Catch The Insect</h1>
+                    <button class="play">Let's Play</button>
+
+                </div>
+
+            </div>
+            <div class="parent2">
+                <h1 class="your">Waht Is Your" Favorit " Insect?</h1>
+                <div class="container">
+                    <div class="child c1">
+                        <img class="pic" src="./fly_PNG3946.png" alt="">
+                    </div>
+                    <div class="child c2">
+                        <img class="pic" src="./mosquito_PNG18175.png" alt="">
+                    </div>
+                    <div class="child c3">
+                        <img class="pic" src="./roach_PNG12163.png" alt="">
+                    </div>
+                    <div class="child c4">
+                        <img class="pic" src="./spider_PNG12.png" alt="">
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="parent3">
+                <div class="navbr">
+
+                    <div class="tim">
+                        <h2 class="txt">Time <span class="mint">0:0</span> : <span class="sec">00:00</span> </h2>
+                    </div>
+                    <div class="scor">
+                        <h2 class="txt">Score : <span class="secc">00:00</span> </h2>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        let btn = document.querySelector(".play")
+        let p1 = document.querySelector(".parent2")
+        let folder = document.querySelector(".foldr")
+        let pic = document.querySelectorAll(".pic")
+        console.log(pic);
+        let child = document.querySelectorAll(".child")
+        let parent3 = document.querySelector(".parent3")
+        let parent1 = document.querySelector(".parent1")
+        let secc = document.querySelector(".secc")
+        let sec = document.querySelector(".sec")
+        // console.log(sec);
+        let mint = document.querySelector(".mint")
+        let c1 = document.querySelector(".c1")
+        let txt = document.querySelector(".txt")
+
+        let min = 0
+        let see = 0
+
+        let imgsource
+        btn.addEventListener("click", function () {
+            parent1.classList.add('up')
+
+
+
+
+        })
+
+
+
+        child.forEach(function (ele, idx) {
+
+            ele.addEventListener('click', function () {
+                // console.log("ele");
+
+                p1.classList.add("up")
+
+                let imge = this.querySelector("img")
+                console.log(imge);
+                imgsource = imge.getAttribute("src")
+                console.log(imgsource);
+
+
+
+                createinsect()
+
+
+            })
+        })
+
+
+
+        let score = 0
+        function createinsect() {
+
+
+            let randm = Math.floor(Math.random() * 360)
+
+            let createInsectDiv = document.createElement("div")
+            parent3.appendChild(createInsectDiv)
+
+            createInsectDiv.classList.add("cid")
+
+
+
+
+            createInsectDiv.innerHTML = `<img class= "imge1" src="${imgsource}" style="transform: rotate(${randm}deg)">`
+
+
+            let rh = window.innerHeight
+            console.log(rh, "h");
+
+
+            let rw = window.innerWidth
+            console.log(rw, "w");
+
+
+            let x = Math.random() * rh
+
+            let y = Math.random() * rw
+
+
+
+
+            createInsectDiv.style.marginLeft = `${x}px`
+
+            createInsectDiv.style.marginTop = `${y}px`
+
+
+
+
+
+
+            createInsectDiv.addEventListener("click", function () {
+                createInsectDiv.classList.add("kill")
+
+                score++
+
+                secc.innerHTML = score
+
+                addinsect()
+
+                
+
+
+
+
+            })
+        }
+
+
+
+
+
+        function addinsect() {
+
+            setTimeout(createinsect, 1000)
+            setTimeout(createinsect, 1500)
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        setInterval(run, 1000)
+
+        function run() {
+            see++
+            if (see > 59) {
+                min++
+                see = 0
+            }
+            sec.innerHTML = see
+            mint.innerHTML = min
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
